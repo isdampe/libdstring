@@ -6,6 +6,8 @@ int main(int argc, char **argv)
 	string name = string_create("is");
 	name->append_c_str(name, "dampe");
 
+	string name_copy = string_clone(name);
+
 	string welcome = string_create("Thank you testing libdstring.\n\n-- ");
 	welcome->append(welcome, name);
 	printf("%s\n", welcome->c_str(welcome));
@@ -18,6 +20,7 @@ int main(int argc, char **argv)
 
 	string_destroy(welcome);
 	string_destroy(name);
+	string_destroy(name_copy);
 
 	return 0;
 }

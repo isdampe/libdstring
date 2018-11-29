@@ -19,6 +19,11 @@ string string_create(const char *src)
 	return result;
 }
 
+string string_clone(string src)
+{
+	return string_create(src->data);
+}
+
 void string_destroy(string src)
 {
 	free(src->data);

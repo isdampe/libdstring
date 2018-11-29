@@ -17,11 +17,11 @@ typedef struct dstring *string;
 
 // Class functions.
 string string_create(const char *src);
-string string_clone(string src);
+string string_clone(const string src);
 void string_destroy(string src);
-static void dstring_append(string dest, string src);
+static void dstring_append(string dest, const string src);
 static void dstring_append_c_str(string dest, const char *src);
-static void dstring_set(string dest, string src);
+static void dstring_set(string dest, const string src);
 static void dstring_set_c_str(string dest, const char *src);
 static char *dstring_c_str(const string src);
 

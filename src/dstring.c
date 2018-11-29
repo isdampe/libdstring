@@ -5,9 +5,13 @@
 string string_create(const char *src)
 {
 	string result = malloc(sizeof(struct dstring));
+
 	result->append = &dstring_append;
 	result->append_c_str = &dstring_append_c_str;
+	result->set = &dstring_set;
+	result->set_c_str = &dstring_set_c_str;
 	result->c_str = &dstring_c_str;
+
 	result->length = strlen(src);
 	result->data = malloc(dstring_alloc_str_size(result));
 	strcpy(result->data, src);
@@ -19,6 +23,18 @@ void string_destroy(string src)
 {
 	free(src->data);
 	free(src);
+}
+
+static void dstring_set(string dest, string src)
+{
+	dstring_set_c_str(dest, src->data);
+}
+
+static void dstring_set_c_str(string dest, const char *src)
+{
+	dest->length = strlen(src);
+	dest->data = realloc(dest->data, dstring_alloc_str_size(dest));
+	strcpy(dest->data, src);
 }
 
 static void dstring_append(string dest, string src)

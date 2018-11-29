@@ -8,7 +8,10 @@ int main(int argc, char **argv)
 
 	string welcome = string_create("Thank you testing libdstring.\n\n-- ");
 	welcome->append(welcome, name);
-	printf("%s\n", welcome->data);
+	printf("%s\n", welcome->c_str(welcome));
+
+	welcome->set_c_str(welcome, "It really works.");
+	printf("%s\n", welcome->c_str(welcome));
 
 	string_destroy(welcome);
 	string_destroy(name);

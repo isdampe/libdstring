@@ -11,6 +11,8 @@ string string_create(const char *src)
 	result->set = &dstring_set;
 	result->set_c_str = &dstring_set_c_str;
 	result->c_str = &dstring_c_str;
+	result->match = &dstring_match;
+	result->match_c_str = &dstring_match_c_str;
 
 	result->length = strlen(src);
 	result->data = malloc(dstring_alloc_str_size(result));
@@ -57,4 +59,14 @@ static void dstring_append_c_str(string dest, const char *src)
 static char *dstring_c_str(const string src)
 {
 	return src->data;
+}
+
+static int dstring_match(const string str1, const string str2)
+{
+	return dstring_match_c_str(str1, str2->data);
+}
+
+static int dstring_match_c_str(const string str1, const char *str2)
+{
+	return (strcmp(str1->data, str2) == 0 ? 1 : 0);
 }

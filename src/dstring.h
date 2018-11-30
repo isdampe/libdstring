@@ -11,6 +11,8 @@ struct dstring {
 	void (*set)(struct dstring *self, struct dstring *src);
 	void (*set_c_str)(struct dstring *self, const char *src);
 	char *(*c_str)(struct dstring *self);
+	int (*match)(struct dstring *self, struct dstring *str2);
+	int (*match_c_str)(struct dstring *self, const char *str2);
 };
 
 typedef struct dstring *string;
@@ -24,5 +26,7 @@ static void dstring_append_c_str(string dest, const char *src);
 static void dstring_set(string dest, const string src);
 static void dstring_set_c_str(string dest, const char *src);
 static char *dstring_c_str(const string src);
+static int dstring_match(const string str1, const string str2);
+static int dstring_match_c_str(const string str1, const char *str2);
 
 #endif

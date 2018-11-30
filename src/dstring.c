@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "dstring.h"
 
 string string_create(const char *src)
@@ -13,6 +14,7 @@ string string_create(const char *src)
 	result->c_str = &dstring_c_str;
 	result->matches = &dstring_matches;
 	result->matches_c_str = &dstring_matches_c_str;
+	result->strip = &dstring_strip;
 
 	result->length = strlen(src);
 	result->data = malloc(dstring_alloc_str_size(result));
@@ -69,4 +71,9 @@ static int dstring_matches(const string str1, const string str2)
 static int dstring_matches_c_str(const string str1, const char *str2)
 {
 	return (strcmp(str1->data, str2) == 0 ? 1 : 0);
+}
+
+static void dstring_strip(string src)
+{
+
 }

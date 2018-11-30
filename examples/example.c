@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 
 	string test1 = string_create("Hello world.");
 	string test2 = string_create("Hello world.");
-	if (test1->match(test1, test2))
+	if (test1->matches(test1, test2))
 		printf("The strings match!\n");
 
 	string_destroy(welcome);

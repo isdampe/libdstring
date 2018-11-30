@@ -11,8 +11,8 @@ string string_create(const char *src)
 	result->set = &dstring_set;
 	result->set_c_str = &dstring_set_c_str;
 	result->c_str = &dstring_c_str;
-	result->match = &dstring_match;
-	result->match_c_str = &dstring_match_c_str;
+	result->matches = &dstring_matches;
+	result->matches_c_str = &dstring_matches_c_str;
 
 	result->length = strlen(src);
 	result->data = malloc(dstring_alloc_str_size(result));
@@ -61,12 +61,12 @@ static char *dstring_c_str(const string src)
 	return src->data;
 }
 
-static int dstring_match(const string str1, const string str2)
+static int dstring_matches(const string str1, const string str2)
 {
-	return dstring_match_c_str(str1, str2->data);
+	return dstring_matches_c_str(str1, str2->data);
 }
 
-static int dstring_match_c_str(const string str1, const char *str2)
+static int dstring_matches_c_str(const string str1, const char *str2)
 {
 	return (strcmp(str1->data, str2) == 0 ? 1 : 0);
 }

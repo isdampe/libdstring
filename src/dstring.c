@@ -75,5 +75,24 @@ static int dstring_matches_c_str(const string str1, const char *str2)
 
 static void dstring_strip(string src)
 {
+	size_t li = 0, ri = src->length -1;
 
+	for (; li<src->length; ++li) {
+		if (! isspace(src->data[li]))
+			break;
+	}
+
+	for (; ri>0; --ri) {
+		if (! isspace(src->data[ri]))
+			break;
+	}
+
+	size_t diff = src->length - li - (src->length - ri) + 2;
+	char *buffer = malloc((diff + 1) * sizeof(char));
+	memcpy(buffer, (src->data + (li * sizeof(char))), diff);
+	buffer[diff -1] = '\0';
+
+	dstring_set_c_str(src, buffer);
+
+	free(buffer);
 }

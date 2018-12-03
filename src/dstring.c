@@ -15,6 +15,8 @@ string string_create(const char *src)
 	result->matches = &dstring_matches;
 	result->matches_c_str = &dstring_matches_c_str;
 	result->strip = &dstring_strip;
+	result->ltrim = &dstring_ltrim;
+	result->rtrim = &dstring_rtrim;
 
 	result->length = strlen(src);
 	result->data = malloc(dstring_alloc_str_size(result));
@@ -95,4 +97,40 @@ static void dstring_strip(string src)
 	dstring_set_c_str(src, buffer);
 
 	free(buffer);
+}
+
+static void dstring_ltrim(string src)
+{
+	size_t li = 0;
+	for (; li<src->length; ++li) {
+		if (! isspace(src->data[li]))
+			break;
+	}
+
+	if (li == 0)
+		return;
+
+	size_t diff = src->length - li;
+	char *buffer = malloc((diff + 1) * sizeof(char));
+	memcpy(buffer, (src->data + (li * sizeof(char))), diff);
+	buffer[diff -1] = '\0';
+	dstring_set_c_str(src, buffer);
+}
+
+static void dstring_rtrim(string src)
+{
+	int ri = src->length -1;
+	for (; ri >= 0; --ri) {
+		if (! isspace(src->data[ri]))
+			break;
+	}
+
+	size_t diff = src->length - ri;
+	if (diff == src->length)
+		return;
+
+	char *buffer = malloc((ri +2) * sizeof(char));
+	memcpy(buffer, src->data, ri +1);
+	buffer[ri +1] = '\0';
+	dstring_set_c_str(src, buffer);
 }

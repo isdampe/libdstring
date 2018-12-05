@@ -17,6 +17,8 @@ string string_create(const char *src)
 	result->strip = &dstring_strip;
 	result->ltrim = &dstring_ltrim;
 	result->rtrim = &dstring_rtrim;
+	result->to_upper = &dstring_to_upper;
+	result->to_lower = &dstring_to_lower;
 
 	result->length = strlen(src);
 	result->data = malloc(dstring_alloc_str_size(result));
@@ -133,4 +135,16 @@ static void dstring_rtrim(string src)
 	memcpy(buffer, src->data, ri +1);
 	buffer[ri +1] = '\0';
 	dstring_set_c_str(src, buffer);
+}
+
+static void dstring_to_upper(string src)
+{
+	for(size_t i = 0; i<src->length; i++)
+		src->data[i] = toupper(src->data[i]);
+}
+
+static void dstring_to_lower(string src)
+{
+	for(size_t i = 0; i<src->length; i++)
+		src->data[i] = tolower(src->data[i]);
 }

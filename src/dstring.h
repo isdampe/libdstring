@@ -16,6 +16,8 @@ struct dstring {
 	void (*strip)(struct dstring *self);
 	void (*ltrim)(struct dstring *self);
 	void (*rtrim)(struct dstring *self);
+	void (*to_upper)(struct dstring *self);
+	void (*to_lower)(struct dstring *self);
 };
 
 typedef struct dstring *string;
@@ -34,5 +36,7 @@ static int dstring_matches_c_str(const string str1, const char *str2);
 static void dstring_strip(string src);
 static void dstring_ltrim(string src);
 static void dstring_rtrim(string src);
+static void dstring_to_upper(string src);
+static void dstring_to_lower(string src);
 
 #endif

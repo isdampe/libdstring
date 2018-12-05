@@ -43,6 +43,12 @@ int main(int argc, char **argv)
 	lstrip->rtrim(rstrip);
 	printf("'%s'\n", rstrip->c_str(rstrip));
 
+	string cs = string_create("HELLo WorLd");
+	printf("%s\n", cs->c_str(cs));
+	cs->to_lower(cs);
+	printf("%s\n", cs->c_str(cs));
+	cs->to_upper(cs);
+	printf("%s\n", cs->c_str(cs));
 
 	string_destroy(welcome);
 	string_destroy(name);
@@ -51,6 +57,7 @@ int main(int argc, char **argv)
 	string_destroy(test2);
 	string_destroy(lstrip);
 	string_destroy(rstrip);
+	string_destroy(cs);
 
 	return 0;
 }

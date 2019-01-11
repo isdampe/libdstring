@@ -3,61 +3,62 @@
 
 int main(int argc, char **argv)
 {
-	string name = string_create("is");
-	name->append_c_str(name, "dampe");
+	string name = dstring_create("is");
+	dstring_append_c_str(name, "dampe");
 
-	string name_copy = string_clone(name);
+	string name_copy = dstring_clone(name);
 
-	string welcome = string_create("Thank you testing libdstring.\n\n-- ");
-	welcome->append(welcome, name);
-	printf("%s\n", welcome->c_str(welcome));
+	string welcome = dstring_create("Thank you testing libdstring.\n\n-- ");
+	dstring_append(welcome, name);
+	printf("%s\n", welcome->str);
 
-	welcome->set_c_str(welcome, "It really works.");
-	printf("%s\n", welcome->c_str(welcome));
+	dstring_set_c_str(welcome, "It really works.");
+	printf("%s\n", welcome->str);
 
-	welcome->set(welcome, name);
-	printf("%s\n", welcome->c_str(welcome));
+	dstring_set(welcome, name);
+	printf("%s\n", welcome->str);
 
-	string test1 = string_create("Hello world.");
-	string test2 = string_create("Hello world.");
-	if (test1->matches(test1, test2))
+	string test1 = dstring_create("Hello world.");
+	string test2 = dstring_create("Hello world.");
+	if (dstring_matches(test1, test2))
 		printf("The strings match!\n");
 
-	string strip = string_create("  It works .  ");
-	printf("'%s'\n", strip->c_str(strip));
-	strip->strip(strip);
-	printf("'%s'\n", strip->c_str(strip));
+	string strip = dstring_create("  It works .  ");
+	printf("'%s'\n", strip->str);
+	dstring_strip(strip);
+	printf("'%s'\n", strip->str);
 
-	string strip2 = string_create("");
-	printf("'%s'\n", strip2->c_str(strip2));
-	strip->strip(strip2);
-	printf("'%s'\n", strip2->c_str(strip2));
 
-	string lstrip = string_create("   It's Richard.");
-	printf("'%s'\n", lstrip->c_str(lstrip));
-	lstrip->ltrim(lstrip);
-	printf("'%s'\n", lstrip->c_str(lstrip));
+	string strip2 = dstring_create("");
+	printf("'%s'\n", strip2->str);
+	dstring_strip(strip2);
+	printf("'%s'\n", strip2->str);
 
-	string rstrip = string_create("It's Richard.       ");
-	printf("'%s'\n", rstrip->c_str(rstrip));
-	lstrip->rtrim(rstrip);
-	printf("'%s'\n", rstrip->c_str(rstrip));
+	string lstrip = dstring_create("   It's Richard.");
+	printf("'%s'\n", lstrip->str);
+	dstring_ltrim(lstrip);
+	printf("'%s'\n", lstrip->str);
 
-	string cs = string_create("HELLo WorLd");
-	printf("%s\n", cs->c_str(cs));
-	cs->to_lower(cs);
-	printf("%s\n", cs->c_str(cs));
-	cs->to_upper(cs);
-	printf("%s\n", cs->c_str(cs));
+	string rstrip = dstring_create("It's Richard.       ");
+	printf("'%s'\n", rstrip->str);
+	dstring_rtrim(rstrip);
+	printf("'%s'\n", rstrip->str);
 
-	string_destroy(welcome);
-	string_destroy(name);
-	string_destroy(name_copy);
-	string_destroy(test1);
-	string_destroy(test2);
-	string_destroy(lstrip);
-	string_destroy(rstrip);
-	string_destroy(cs);
+	string cs = dstring_create("HELLo WorLd");
+	printf("%s\n", cs->str);
+	dstring_to_lower(cs);
+	printf("%s\n", cs->str);
+	dstring_to_upper(cs);
+	printf("%s\n", cs->str);
+
+	dstring_destroy(welcome);
+	dstring_destroy(name);
+	dstring_destroy(name_copy);
+	dstring_destroy(test1);
+	dstring_destroy(test2);
+	dstring_destroy(lstrip);
+	dstring_destroy(rstrip);
+	dstring_destroy(cs);
 
 	return 0;
 }

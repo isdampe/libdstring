@@ -62,6 +62,9 @@ bool dstring_matches_c_str(const string str1, const char *str2)
 
 void dstring_strip(string src)
 {
+	if (src->length == 0)
+		return;
+
 	size_t li = 0, ri = src->length -1;
 
 	for (; li<src->length; ++li) {
@@ -86,6 +89,9 @@ void dstring_strip(string src)
 
 void dstring_ltrim(string src)
 {
+	if (src->length == 0)
+		return;
+
 	size_t li = 0;
 	for (; li<src->length; ++li) {
 		if (! isspace(src->str[li]))
@@ -100,10 +106,14 @@ void dstring_ltrim(string src)
 	memcpy(buffer, (src->str + (li * sizeof(char))), diff);
 	buffer[diff] = '\0';
 	dstring_set_c_str(src, buffer);
+	free(buffer);
 }
 
 void dstring_rtrim(string src)
 {
+	if (src->length == 0)
+		return;
+
 	int ri = src->length -1;
 	for (; ri >= 0; --ri) {
 		if (! isspace(src->str[ri]))
@@ -118,6 +128,7 @@ void dstring_rtrim(string src)
 	memcpy(buffer, src->str, ri +1);
 	buffer[ri +1] = '\0';
 	dstring_set_c_str(src, buffer);
+	free(buffer);
 }
 
 void dstring_to_upper(string src)

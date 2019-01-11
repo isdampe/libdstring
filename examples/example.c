@@ -59,6 +59,8 @@ int main(int argc, char **argv)
 	dstring_destroy(lstrip);
 	dstring_destroy(rstrip);
 	dstring_destroy(cs);
+	dstring_destroy(strip);
+	dstring_destroy(strip2);
 
 	return 0;
 }
